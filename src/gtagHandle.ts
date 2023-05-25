@@ -3,7 +3,7 @@ import { GTAG_BASEURL } from './config';
 import { pvPayloadType, eventPayloadType } from '../types/gtag';
 import { AxiosRequestConfig } from 'axios';
 import { DEFAULT_AXIOS_HEADER } from './config';
-import { getPvParams, getEventParams } from './utils';
+import { getPvParams, getEventParams, getCustomEventParams } from './utils';
 export const gtagHandle = async ({
   type,
   title,
@@ -13,7 +13,7 @@ export const gtagHandle = async ({
   // console.log(params.sid, params.cid, params._p)
 
   const config: AxiosRequestConfig = {
-    params: type === 'pv' ? getPvParams(tid, title) : getEventParams(tid, eventObj),
+    params: type === 'pv' ? getPvParams(tid, title) : ( type === 'event' ? getEventParams(tid, eventObj): getCustomEventParams(tid,eventObj)),
     headers: {
       ...DEFAULT_AXIOS_HEADER,
       referer: '',

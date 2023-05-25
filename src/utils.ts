@@ -46,3 +46,13 @@ export const getEventParams = (
   'ep.event_value': eventObj.value,
   en: eventObj.action,
 });
+
+export const getCustomEventParams = (
+  tid: string,
+  eventObj: any
+): eventParamsType => ({
+  ...DEFAULT_AXIOS_PARAMS,
+  ...getSystemParams(),
+  tid,
+ ...eventObj
+});
